@@ -17,13 +17,29 @@ protected void onSaveInstanceState(Bundle outState)
         super.onSaveInstanceState(outState); 
         outState.putBoolean(PREVIEW_SHOWED, previewEnabled);
     }
-
+ 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == PicturePreviewActivity.REQUEST_PREVIEW && resultCode == RESULT_CANCELED)
+            {
+                disablePreviewImageButton();
+            }
+        }
+        else if(requestCode == CameraHelper.SELECT_PIC_CODE && resultCode == RESULT_OK)
+        {
+            disablePreviewImageButton();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
 private void disablePreviewImageButton()
     {
         cameraViewWithVideoView.disablePreviewBtnOnPhone();
         previewShowed = false;
     }
+ 
+
     
     
 }
