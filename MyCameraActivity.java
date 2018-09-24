@@ -3,9 +3,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-
 import android.os.Bundle;
-
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +15,6 @@ public class MyCameraActivity extends Activity {
     private static final int CAMERA_REQUEST = 1888;
     private ImageView imageView;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
-
 
 
     @Override
