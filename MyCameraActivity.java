@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-
 public class MyCameraActivity extends Activity {
     private static final int CAMERA_REQUEST = 1888;
     private ImageView imageView;
@@ -53,6 +52,4 @@ public class MyCameraActivity extends Activity {
             imageView.setImageBitmap(photo);
         }
     }
-
-
 }
