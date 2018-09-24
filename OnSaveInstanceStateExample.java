@@ -39,7 +39,17 @@ private void disablePreviewImageButton()
         previewShowed = false;
     }
  
+public void launchSelectPicture(IbwmIdentity identity, String parType)
+    {
+        Bundle params = identity.getBundle();
+        params.putString(Annotation.PARENT_TYPE_EXTRA, parType);
+        params.putString(PicturePreviewActivity.PARENT_ACTIVITY_NAME_KEY, TAG);
 
+        Intent intent = new Intent(this, PictureFolderViewerActivity.class);
+        intent.putExtra(PictureFolderViewerActivity.BUNDLE_EXTRA, params);
+        intent.putExtra(PictureFolderContentViewerActivity.START_FOR_ANNOTATION_EXTRA, true);
+        startActivityForResult(intent, CameraHelper.SELECT_PIC_CODE);
+    }
     
     
 }
