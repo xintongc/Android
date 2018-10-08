@@ -1,3 +1,5 @@
+https://my.oschina.net/fengheju/blog/655861
+
 
 https://stackoverflow.com/questions/7575921/illegalstateexception-can-not-perform-this-action-after-onsaveinstancestate-wit
 https://www.androiddesignpatterns.com/2013/08/fragment-transaction-commit-state-loss.html
