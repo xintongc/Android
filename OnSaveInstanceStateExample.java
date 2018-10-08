@@ -1,6 +1,6 @@
 public class AddAnnotationsActivity{
-private static final String PREVIEW_SHOWED = "previewShowed";
-private boolean previewShowed = false;
+private static final String PREVIEW_ENABLED = "previewEnabled";
+private boolean previewEnabled = false;
 
  public void onCreate(Bundle savedInstanceState)
     {
