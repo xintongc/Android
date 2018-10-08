@@ -36,7 +36,7 @@ protected void onSaveInstanceState(Bundle outState)
 private void disablePreviewImageButton()
     {
         cameraViewWithVideoView.disablePreviewBtnOnPhone();
-        PREVIEW_ENABLED = false;
+        previewEnabled = false;
     }
  
 public void launchSelectPicture(IbwmIdentity identity, String parType)
