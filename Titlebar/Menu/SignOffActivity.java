@@ -108,5 +108,30 @@ public class SignOffActivity extends IBWaveBrandedActivity implements ISignOffAc
         }
 
     }
+    
+    private void pasteClipBoard()
+    {
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        if(clipboard != null)
+        {
+            if (clipboard.hasPrimaryClip())
+            {
+                ClipData clipData = clipboard.getPrimaryClip();
+                String pasteData = clipData.getItemAt(0).getText().toString();
+                if (getCurrentFocus() != null)
+                {
+                    EditText currentText = (EditText)getCurrentFocus();
+                    pasteData = currentText.getText() + pasteData;
+                    currentText.setText(pasteData);
+                    currentText.setSelection(currentText.getText().length());
+                }
+            }
+            else
+                showToast();
+        }
+        else
+            showToast();
+
+    }
 
 }
