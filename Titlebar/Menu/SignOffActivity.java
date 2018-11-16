@@ -1,3 +1,27 @@
+package com.ibwave.ibwavemobile.activities;
+
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.ibwave.ibwavemobile.R;
+import com.ibwave.ibwavemobile.contracts.ISignOffActivityContract;
+import com.ibwave.ibwavemobile.presenters.SignOffActivityPresenter;
+import com.ibwave.utils.androidapp.IBWaveBrandedActivity;
+
+
 public class SignOffActivity extends IBWaveBrandedActivity implements ISignOffActivityContract.IView
 {
     private boolean editable = false;
@@ -70,6 +94,78 @@ public class SignOffActivity extends IBWaveBrandedActivity implements ISignOffAc
         super.onSaveInstanceState(outState);
     }
 
+    private void onCancelPressed()
+    {
+        if (hasChanges())
+            showSaveDialog();
+        else
+            this.finish();
+    }
+
+    public void showSaveDialog()
+    {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setMessage(R.string.save_changes_alert_message);
+        alert.setPositiveButton(R.string.save, new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int i)
+            {
+                saveSignOff();
+                dialog.dismiss();
+                SignOffActivity.this.finish();
+            }
+        });
+        alert.setNegativeButton(R.string.discard, new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int i)
+            {
+                dialog.dismiss();
+                SignOffActivity.this.finish();
+            }
+        });
+        alert.setCancelable(true);
+        alert.show();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        onCancelPressed();
+    }
+
+    private boolean hasChanges()
+    {
+        if (textEditor.getText().toString().compareTo(signOffActivityPresenter.getSignOffText()) != 0 || signOffTitle.getText().toString().compareTo(signOffActivityPresenter.getSignOffTitle()) != 0)
+            return true;
+        else
+            return false;
+    }
+
+    private void initPresenter()
+    {
+        signOffActivityPresenter = new SignOffActivityPresenter();
+    }
+
+    private void initEditText()
+    {
+        textEditor = (EditText)findViewById(R.id.sign_off_text_editor);
+        signOffTitle = (EditText)findViewById(R.id.sign_off_title);
+        textEditor.setText(signOffActivityPresenter.getSignOffText());
+        signOffTitle.setText(signOffActivityPresenter.getSignOffTitle());
+    }
+
+    public void showSoftKeyboard(View view) {
+        if (view.requestFocus()) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            if(imm != null)
+            {
+                imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+            }
+        }
+    }
+
     private void initToolBar()
     {
         Toolbar toolbar = (Toolbar) findViewById(R.id.sign_off_action_bar);
@@ -81,6 +177,12 @@ public class SignOffActivity extends IBWaveBrandedActivity implements ISignOffAc
             actionBar.setHomeAsUpIndicator(R.drawable.ic_clear_black_24dp);
             actionBar.setTitle("");
         }
+    }
+
+    private void saveSignOff()
+    {
+        signOffActivityPresenter.setSignOffText(textEditor.getText().toString());
+        signOffActivityPresenter.setSignOffTitle(signOffTitle.getText().toString());
     }
 
     private void updateViews(MenuItem item)
@@ -108,7 +210,7 @@ public class SignOffActivity extends IBWaveBrandedActivity implements ISignOffAc
         }
 
     }
-    
+
     private void pasteClipBoard()
     {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
@@ -134,4 +236,9 @@ public class SignOffActivity extends IBWaveBrandedActivity implements ISignOffAc
 
     }
 
+    private void showToast()
+    {
+        Toast toast = Toast.makeText(this, getResources().getString(R.string.settings_screen_empty_clipboard), Toast.LENGTH_LONG);
+        toast.show();
+    }
 }
