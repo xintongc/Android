@@ -1,27 +1,3 @@
-package com.ibwave.ibwavemobile.activities;
-
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import com.ibwave.ibwavemobile.R;
-import com.ibwave.ibwavemobile.contracts.ISignOffActivityContract;
-import com.ibwave.ibwavemobile.presenters.SignOffActivityPresenter;
-import com.ibwave.utils.androidapp.IBWaveBrandedActivity;
-
-
 public class SignOffActivity extends IBWaveBrandedActivity implements ISignOffActivityContract.IView
 {
     private boolean editable = false;
