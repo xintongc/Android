@@ -6,7 +6,7 @@ public class SignOffActivity extends IBWaveBrandedActivity implements ISignOffAc
     private Menu menu;
     private SignOffActivityPresenter signOffActivityPresenter;
 
-@Override
+    @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -70,7 +70,7 @@ public class SignOffActivity extends IBWaveBrandedActivity implements ISignOffAc
         super.onSaveInstanceState(outState);
     }
 
- private void initToolBar()
+    private void initToolBar()
     {
         Toolbar toolbar = (Toolbar) findViewById(R.id.sign_off_action_bar);
         setSupportActionBar(toolbar);
@@ -83,7 +83,7 @@ public class SignOffActivity extends IBWaveBrandedActivity implements ISignOffAc
         }
     }
 
-private void updateViews(MenuItem item)
+    private void updateViews(MenuItem item)
     {
         textEditor.setSelectAllOnFocus(editable);
         signOffTitle.setSelectAllOnFocus(editable);
