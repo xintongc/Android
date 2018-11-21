@@ -541,4 +541,81 @@ public class ComponentPropertiesRecyclerViewAdapter extends RecyclerView.Adapter
         return null;
     }
 }
+package com.ibwave.ibwavemobile.entities.smallcell;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+/**
+ * Created by agidaro on 3/17/2017.
+ */
+
+public class CustomPropertiesChoice implements Parcelable
+{
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator()
+    {
+        public CustomPropertiesChoice createFromParcel(Parcel in)
+        {
+            return new CustomPropertiesChoice(in);
+        }
+
+        public CustomPropertiesChoice[] newArray(int size)
+        {
+            return new CustomPropertiesChoice[size];
+        }
+    };
+    private Integer id;
+    private Integer customPropertyId;
+    private String value;
+
+    public CustomPropertiesChoice(){}
+
+    public Integer getId()
+    {
+        return id;
+    }
+
+    public void setId(Integer id)
+    {
+        this.id = id;
+    }
+
+    public void setCustomPropertyId(Integer customPropertyId)
+    {
+        this.customPropertyId = customPropertyId;
+    }
+
+    public Integer getCustomPropertyId()
+    {
+        return customPropertyId;
+    }
+
+    public void setValue(String value)
+    {
+        this.value = value;
+    }
+
+    public String getValue()
+    {
+        return value;
+    }
+
+    public CustomPropertiesChoice(Parcel in)
+    {
+        id = in.readInt();
+        customPropertyId = in.readInt();
+        value = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(customPropertyId);
+        dest.writeString(value);
+    }
+}
 
