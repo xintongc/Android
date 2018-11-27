@@ -1,0 +1,5 @@
+In XML:
+android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+
+In Java:
+editText.setKeyListener(DigitsKeyListener.getInstance("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"));
