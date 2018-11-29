@@ -1,0 +1,25 @@
+ public String autoIncrement(String input)
+    {
+        String s = input;
+        String prefix = "";
+        String suffix = "";
+        boolean numberStart = false;
+        boolean numberEnd = false;
+        int digit = 0;
+        int number = 0;
+        for(int i = input.length(); i >= 0; i--)
+        {
+
+            char ch = input.charAt(i);
+            if(Character.isDigit(ch) && numberStart == false)
+            {
+                numberStart = true;
+                int n = Character.valueOf(ch);
+                number += n * Math.pow(10,digit);
+                digit++;
+            }
+
+        }
+
+        return s;
+    }
